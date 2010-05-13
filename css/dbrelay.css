@@ -1,0 +1,33 @@
+body {
+    width: 70%;
+    max-width: 60em;
+    min-width: 40em;
+    margin: auto;
+    font-family: Arial, "MS Trebuchet", sans-serif;
+}
+
+.menu {
+    text-align: center;
+}
+
+img.logo {
+    float: right;
+}
+
+h1 {
+    clear: both;
+}
+
+p {
+    text-align: justify;
+}
+
+a:hover {
+    background-color: #eee;
+}
+
+a {
+    text-decoration: none;
+    color: dimgray;
+    padding: 0.2em;
+}
