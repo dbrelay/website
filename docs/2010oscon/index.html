@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>DB Relay: An Introduction @ OSCON 2010</title>
+    <link rel="stylesheet" type="text/css" media="all" charset="utf-8" href="http://dbrelay.net:1433/dbrelay/js/ext-3.0.0/resources/css/ext-all.css">
+    <style type="text/css" media="screen">
+      img.slide {
+        display: block;
+        width: 1024;
+        margin: auto;
+      }
+    </style>
+    <script type="text/javascript" charset="utf-8" src="http://dbrelay.net:1433/dbrelay/js/jquery/jquery-1.3.2.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dbrelay.net:1433/dbrelay/js/ext-3.0.0/adapter/jquery/ext-jquery-adapter.js"></script>
+    <script type="text/javascript" charset="utf-8" src="http://dbrelay.net:1433/dbrelay/js/ext-3.0.0/ext-all.js"></script>
+    <script type="text/javascript" charset="utf-8">
+      Ext.onReady(function(){
+        var size = 31;
+
+        var step = function( delta ){
+          return function() {
+            var curr = parseInt( tabs.getActiveTab().id, 10 ) - 1;
+            tabs.setActiveTab( ( size + curr + delta ) % size );
+          };
+        };
+
+        var tabs = new Ext.TabPanel({
+          renderTo: 'body',
+          minTabWidth: 40,
+          enableTabScroll: true,
+          height: 838,
+          defaults: { autoScroll: false },
+          buttons: [
+            { text: '<<<', handler: step( -1 ) },
+            { text: '>>>', handler: step( 1 ) }
+          ]
+        });
+        
+        var index = 0;
+        var sid;
+        while( index < size ){
+          index++;
+          sid = String.leftPad( index.toString(), 2, '0');
+          tabs.add({
+            id: sid + 'slide',
+            title: sid,
+            html: String.format( '<img class="slide" src="Slide{0}.png" />', sid )
+          }).show();
+        };
+        tabs.setActiveTab( 0 );
+      });
+    </script>
+  </head>
+  <body id="body"></body>
+</html>

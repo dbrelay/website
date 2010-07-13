@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+      <title>Building DB Relay</title>
+      <link rel="stylesheet" href="/css/dbrelay.css" type="text/css" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <img class="logo" src="/img/dbrelay_64.png" />
+    <p class="menu">
+        <a href="http://www.dbrelay.com/">HOME</a>
+        <a href="http://www.dbrelay.org/">COMMUNITY</a>
+        <a href="http://www.dbrelay.net:1433/">TESTBED</a>
+        <a href="http://github.com/dbrelay/dbrelay/">REPOSITORY</a>
+        <a href="http://github.com/dbrelay/dbrelay/issues">ISSUE TRACKER</a>
+        <a href="http://www.dbrelay.com/downloads/">DOWNLOADS</a>
+    </p>
+    <hr />
+    <h1>Building DB Relay</h1>
+    <p>
+      The following instructions are known to work on stock development installs of Mac OS X 10.5+ and CentOS 5.2+. On Mac OS X make sure that you have latest XCode Tools installed. A non-development installs of CentOS will need at least the following packages:
+    </p>
+    <pre class="code">$ yum install glibc glibc-devel gcc patch zlib zlib-devel openssl-devel autoconf m4 make</pre>
+    <p>
+      These instructions also assume that the local code repository path is stored in the DBR_GIT environment variable and the target installation path is in the DBR_HOME environment variable. Neither variable is needed for neither building nor running DB Relay.
+    </p>
+    <p>First, create a local code repository.</p>
+    <pre class="code">$ git clone git@github.com:dbrelay/dbrelay.git ${DBR_GIT}<br />$ cd ${DBR_GIT}</pre>
+    <p>Then update dependency git sub-modules</p>
+    <pre class="code">$ git submodule init<br />$ git submodule update</pre>
+    <p>If you are compiling a DB Relay instance to query MS SQL server, use the freetds configuration parameter.</p>
+    <pre class="code">$ ./configure --prefix=~/dbrelay --with-freetds</pre>
+    <p>Otherwise point the ODBC parameter to your system&apos;s unixODBC install. There are yet more steps involved in running an ODBC-based instance of DB Relay, which will be covered later or via the mailing list (for now).</p>
+    <pre class="code">./configure --prefix=/home/dbrelay_1440 --with-odbc=/usr</pre>
+    <p>Finally, run a standard sequence of make and make install commands.</p>
+    <pre class="code">$ make<br />$ make install</pre>
+    <p>Note, that depending on the system configuration, the install step may need to be executed as a superuser.</p>
+    <hr />
+  </body>
+</html>
