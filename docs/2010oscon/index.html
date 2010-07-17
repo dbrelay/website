@@ -9,7 +9,7 @@
     <style type="text/css" media="screen">
       img.slide {
         display: block;
-        width: 1024;
+        width: 800;
         margin: auto;
       }
     </style>
@@ -18,7 +18,7 @@
     <script type="text/javascript" charset="utf-8" src="http://dbrelay.net:1433/dbrelay/js/ext-3.0.0/ext-all.js"></script>
     <script type="text/javascript" charset="utf-8">
       Ext.onReady(function(){
-        var size = 31;
+        var size = 37;
 
         var step = function( delta ){
           return function() {
@@ -28,11 +28,8 @@
         };
 
         var tabs = new Ext.TabPanel({
-          renderTo: 'body',
-          minTabWidth: 40,
           enableTabScroll: true,
-          height: 838,
-          defaults: { autoScroll: false },
+          defaults: { autoScroll: true },
           buttons: [
             { text: '<<<', handler: step( -1 ) },
             { text: '>>>', handler: step( 1 ) }
@@ -51,6 +48,12 @@
           }).show();
         };
         tabs.setActiveTab( 0 );
+
+        new Ext.Viewport({
+          layout: 'fit',
+          items: tabs
+        });
+
       });
     </script>
   </head>
