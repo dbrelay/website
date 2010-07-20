@@ -22,7 +22,20 @@ p.menu a:hover {
 }
 h1, h2 {
     clear: both;
-    margin-top: 1em;
+    margin-top: 2em;
+    color: #555;
+    padding-top: 0.2em;
+    padding-right: 0.2em;
+    font-size:120%;
+}
+h1 {
+  text-align: center;
+  font-size: 150%;
+}
+h2 {
+  font-size: 120%;
+  text-align: right;
+  border-top: 1px dotted #444;
 }
 p {
     text-align: justify;

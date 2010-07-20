@@ -6,12 +6,28 @@
       <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
       <title>DB Relay</title>
       <link rel="stylesheet" href="css/dbrelay.css" type="text/css" media="screen" title="no title" charset="utf-8">
+      <script src="http://dbrelay.net:1433/dbrelay/js/jquery/jquery-1.4.2.min.js" ></script>
+      <script>
+        jQuery.getJSON( "http://dbrelay.net:1433/sql?js_callback=?", {
+          connection_name : "DB Relay homepage",
+          sql_server      : "sqlserver",
+          sql_user        : "demo",
+          sql_password    : "demo",
+          sql             : "select @@version as ver, getdate() as now"
+        }, function( response ) {
+          if ( ! response.log.error ) {
+            var ex = jQuery( "#example").show();
+            jQuery( "#db_time", ex ).text( response.data[0].rows[0].now );
+            jQuery(  "#db_ver", ex ).text( response.data[0].rows[0].ver );
+          }
+        });
+      </script>
   </head>
   <body>
       <img class="logo" src="img/dbrelay_64.png" />
       <p class="menu">
         <a href="http://www.dbrelay.com/">HOME</a>
-        <a href="http://www.dbrelay.org/">COMMUNITY</a>
+        <a href="/community.html">COMMUNITY</a>
         <a href="http://www.dbrelay.net:1433/">TESTBED</a>
         <a href="http://github.com/dbrelay/dbrelay/">REPOSITORY</a>
         <a href="http://github.com/dbrelay/dbrelay/issues">ISSUE TRACKER</a>
@@ -20,7 +36,24 @@
       <hr />
       <h1>DB Relay</h1>
       <p>DB Relay is an open source project built around the NGiNX web server platform, providing an HTTP/JSON interface to a variety of database servers. It enables database access without drivers and web application development without complex middleware. Designed for operational efficiency and ease of maintenance.</p>
-      <hr />
+      <div id="example" style="display: none;">
+        <h2>Live Example</h2>
+        <pre>jQuery.getJSON( &quot;http://dbrelay.net:1433/sql?js_callback=?&quot;, {
+  connection_name : &quot;DB Relay homepage&quot;,
+  sql_server      : &quot;sqlserver&quot;,
+  sql_user        : &quot;demo&quot;,
+  sql_password    : &quot;demo&quot;,
+  sql             : &quot;select @@version as ver, getdate() as now&quot;
+}, function( response ) {
+  if ( ! response.log.error ) {
+    var ex = jQuery( &quot;#example&quot;).show();
+    jQuery( &quot;#db_time&quot;, ex ).text( response.data[0].rows[0].now );
+    jQuery(  &quot;#db_ver&quot;, ex ).text( response.data[0].rows[0].ver );
+  }
+});</pre>
+        <p>As of <span id="db_time">the time of query</span> the back-end database runs the following version of database server:</p>
+        <p id="db_ver"><span id="loading">Please wait, the query has not finished yet...</span></p>
+      </div>
       <h2>Information</h2>
       <ul class="infolist">
         <li>

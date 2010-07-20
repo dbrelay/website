@@ -11,7 +11,7 @@
     <img class="logo" src="/img/dbrelay_64.png" />
     <p class="menu">
         <a href="http://www.dbrelay.com/">HOME</a>
-        <a href="http://www.dbrelay.org/">COMMUNITY</a>
+        <a href="/community.html">COMMUNITY</a>
         <a href="http://www.dbrelay.net:1433/">TESTBED</a>
         <a href="http://github.com/dbrelay/dbrelay/">REPOSITORY</a>
         <a href="http://github.com/dbrelay/dbrelay/issues">ISSUE TRACKER</a>
@@ -26,17 +26,23 @@
     <p>
       These instructions also assume that the local code repository path is stored in the DBR_GIT environment variable and the target installation path is in the DBR_HOME environment variable. Neither variable is needed for neither building nor running DB Relay.
     </p>
+    <h2>Download the source code</h2>
     <p>First, create a local code repository.</p>
     <pre class="code">$ git clone git@github.com:dbrelay/dbrelay.git ${DBR_GIT}<br />$ cd ${DBR_GIT}</pre>
     <p>Then update dependency git sub-modules</p>
     <pre class="code">$ git submodule init<br />$ git submodule update</pre>
-    <p>If you are compiling a DB Relay instance to query MS SQL server, use the freetds configuration parameter.</p>
+    <h2>DB Relay instance to query MS SQL Server</h2>
+    <p>Use the freetds configuration parameter.</p>
     <pre class="code">$ ./configure --prefix=~/dbrelay --with-freetds</pre>
-    <p>Otherwise point the ODBC parameter to your system&apos;s unixODBC install. There are yet more steps involved in running an ODBC-based instance of DB Relay, which will be covered later or via the mailing list (for now).</p>
-    <pre class="code">./configure --prefix=/home/dbrelay_1440 --with-odbc=/usr</pre>
-    <p>Finally, run a standard sequence of make and make install commands.</p>
+    <p>Run a standard sequence of make and make install commands.</p>
     <pre class="code">$ make<br />$ make install</pre>
     <p>Note, that depending on the system configuration, the install step may need to be executed as a superuser.</p>
+    <h2>DB Relay instance to query the ODBC instances</h2>
+    <p>Otherwise point the ODBC parameter to your system&apos;s unixODBC install. There are yet more steps involved in running an ODBC-based instance of DB Relay, which will be covered later or via the mailing list (for now).</p>
+    <pre class="code">./configure --prefix=/home/dbrelay_1440 --with-odbc=/usr</pre>
+    <p>Run a standard sequence of make and make install commands.</p>
+    <pre class="code">$ make<br />$ make install</pre>
+    <p>After that you need to configure the ODBC driver manager in /etc/odbc.ini, ~/.odbc.ini, or whatever is the correct file location on your system. Using DB Relay is similar to FreeTDS, simply provide a desired DSN name in the "sql_server" parameter of HTTP requests.</p>
     <hr />
   </body>
 </html>
